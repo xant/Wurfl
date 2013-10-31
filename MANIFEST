@@ -1,0 +1,13 @@
+Changes
+Makefile.PL
+MANIFEST
+ppport.h
+README
+typemap
+Wurfl.xs
+t/Wurfl.t
+fallback/const-c.inc
+fallback/const-xs.inc
+lib/Wurfl.pm
+lib/Wurfl/Device.pm
+script/wurfld.pl
