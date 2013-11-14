@@ -1,6 +1,5 @@
 use 5.010000;
 use ExtUtils::MakeMaker;
-use inc::Module::Install;
 
 my $INC = "-I. ";
 my $LIBS = "-lwurfl ";
@@ -119,5 +118,3 @@ else {
   }
 }
 
-license 'perl';
-install_script 'script/wurfld.pl';

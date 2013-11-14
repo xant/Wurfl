@@ -6,7 +6,8 @@ Makefile.PL
 MANIFEST
 README
 README.md
-script/wurfld.pl
-script/wurfld_http.pl
+ppport.h
+examples/wurfld.pl
+examples/wurfld_http.pl
 t/Wurfl.t
 typemap
