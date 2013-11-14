@@ -2,6 +2,53 @@ use 5.010000;
 use ExtUtils::MakeMaker;
 use inc::Module::Install;
 
+my $INC = "-I. ";
+my $LIBS = "-lwurfl ";
+
+# libwurfl is required for this module to build
+my $WURFL_INCDIR = $ENV{WURFL_INCDIR};
+my $WURFL_LIBDIR = $ENV{WURFL_LIBDIR};
+
+if (!$WURFL_INCDIR) {
+    my @SEARCH_INCDIRS = qw(/usr/include
+                            /usr/local/include
+                            /opt/include
+                            /opt/local/include);
+    foreach my $DIR (@SEARCH_INCDIRS) {
+        if (-d "$DIR/wurfl") {
+            $WURFL_INCDIR = $DIR;
+            last;
+        }
+    }
+}
+
+if (!$WURFL_LIBDIR) {
+    my @SEARCH_LIBDIRS = qw(/usr/lib
+                            /usr/local/lib
+                            /usr/lib64
+                            /usr/local/lib64
+                            /opt/lib
+                            /opt/local/lib
+                            /opt/lib64
+                            /opt/local/lib64);
+    foreach my $DIR (@SEARCH_LIBDIRS) {
+        if (-f "$DIR/libwurfl.so" || -f "$DIR/libwurfl.dylib") {
+            $WURFL_LIBDIR = $DIR;
+            last;
+        }
+    }
+}
+
+if (!$WURFL_INCDIR || !$WURFL_LIBDIR) {
+    die "No libwurfl installed. If installed in a custom directory ".
+        "try setting the environment variables WURFL_INCDIR and WURFL_LIBDIR"
+}
+$INC .= "-I$WURFL_INCDIR"
+    if ($WURFL_INCDIR);
+$LIBS .= "-L$WURFL_LIBDIR"
+    if ($WURFL_LIBDIR);
+
+
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
 WriteMakefile(
@@ -11,9 +58,9 @@ WriteMakefile(
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/Wurfl.pm', # retrieve abstract from module
        AUTHOR         => 'Andrea Guzzo <aguzzo@prod.lhr1.booking.com>') : ()),
-    LIBS              => ['-lwurfl'], # e.g., '-lm'
+    LIBS              => [$LIBS],
     DEFINE            => '', # e.g., '-DHAVE_SOMETHING'
-    INC               => '-I.', # e.g., '-I. -I/usr/include/other'
+    INC               => $INC,
 	# Un-comment this if you add C files to link with later:
     # OBJECT            => '$(O_FILES)', # link all the C files too
 );
