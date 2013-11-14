@@ -109,13 +109,13 @@ sub lookup_useragent {
     my ($self, $uagent) = @_;
     my $device = wurfl_lookup_useragent($self->{_wurfl}, $uagent);
 
-    return Wurfl::Device->new(wurfl => $self, device => $device);
+    return Wurfl::Device->new($self, $device);
 }
 
 sub get_device {
     my ($self, $id) = @_;
     my $device = wurfl_get_device($self->{_wurfl}, $id);
-    return Wurfl::Device->new(wurfl => $self, device => $device);
+    return Wurfl::Device->new($self, $device);
 }
 
 sub add_patch {

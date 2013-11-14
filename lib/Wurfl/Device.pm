@@ -19,23 +19,34 @@ sub new {
     return $self;
 }
 
-sub capabilities {
-    my ($self) = @_;
+sub _fetch_capabilities {
+    my ($enumerator) = @_;
     my $caps;
-    my $hdevicecaps = Wurfl::wurfl_device_get_capability_enumerator($self->{_device});
-
-    while (Wurfl::wurfl_device_capability_enumerator_is_valid($hdevicecaps)) {
-        my $name = Wurfl::wurfl_device_capability_enumerator_get_name($hdevicecaps);
-        my $val = Wurfl::wurfl_device_capability_enumerator_get_value($hdevicecaps);
+    while (Wurfl::wurfl_device_capability_enumerator_is_valid($enumerator)) {
+        my $name = Wurfl::wurfl_device_capability_enumerator_get_name($enumerator);
+        my $val = Wurfl::wurfl_device_capability_enumerator_get_value($enumerator);
 
         $caps->{$name} = $CONVERT_BOOLEAN{$val} // $val;
 
-        Wurfl::wurfl_device_capability_enumerator_move_next($hdevicecaps);
+        Wurfl::wurfl_device_capability_enumerator_move_next($enumerator);
     }
-    Wurfl::wurfl_device_capability_enumerator_destroy($hdevicecaps);
-
     return $caps;
+}
 
+sub capabilities {
+    my ($self) = @_;
+    my $hdevicecaps = Wurfl::wurfl_device_get_capability_enumerator($self->{_device});
+    my $caps = _fetch_capabilities($hdevicecaps);
+    Wurfl::wurfl_device_capability_enumerator_destroy($hdevicecaps);
+    return $caps;
+}
+
+sub virtual_capabilities {
+    my ($self) = @_;
+    my $hdevicecaps = Wurfl::wurfl_device_get_virtual_capability_enumerator($self->{_device});
+    my $caps = _fetch_capabilities($hdevicecaps);
+    Wurfl::wurfl_device_capability_enumerator_destroy($hdevicecaps);
+    return $caps;
 }
 
 sub id {

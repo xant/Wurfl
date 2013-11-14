@@ -11,3 +11,4 @@ fallback/const-xs.inc
 lib/Wurfl.pm
 lib/Wurfl/Device.pm
 script/wurfld.pl
+script/wurfld_http.pl
