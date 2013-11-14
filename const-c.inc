@@ -138,11 +138,11 @@ my @names = (qw(),
             {name=>"WURFL_OK", type=>"IV", macro=>"1"});
 
 print constant_types(), "\n"; # macro defs
-foreach (C_constant ("Wurfl", 'constant', 'IV', $types, undef, 3, @names) ) {
+foreach (C_constant ("Mobile::Libwurfl", 'constant', 'IV', $types, undef, 3, @names) ) {
     print $_, "\n"; # C constant subs
 }
 print "\n#### XS Section:\n";
-print XS_constant ("Wurfl", $types);
+print XS_constant ("Mobile::Libwurfl", $types);
 __END__
    */
 

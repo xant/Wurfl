@@ -9,7 +9,7 @@ use strict;
 use warnings;
 
 use Test::More tests => 16;
-BEGIN { use_ok('Wurfl') };
+BEGIN { use_ok('Mobile::Libwurfl') };
 
 
 my $fail = 0;
@@ -48,7 +48,7 @@ ok( $fail == 0 , 'Constants' );
 # Insert your test code below, the Test::More module is use()ed here so read
 # its man page ( perldoc Test::More ) for help writing this test script.
 
-my $wurfl = Wurfl->new();
+my $wurfl = Mobile::Libwurfl->new();
 
 my $err = $wurfl->set_engine(WURFL_ENGINE_TARGET_HIGH_PERFORMANCE);
 ok ( $err == WURFL_OK, "set_engine()" );

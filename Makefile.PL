@@ -52,12 +52,12 @@ $LIBS .= "-L$WURFL_LIBDIR"
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
 WriteMakefile(
-    NAME              => 'Wurfl',
-    VERSION_FROM      => 'lib/Wurfl.pm', # finds $VERSION
+    NAME              => 'Mobile::Libwurfl',
+    VERSION_FROM      => 'lib/Mobile/Libwurfl.pm', # finds $VERSION
     PREREQ_PM         => {}, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
-      (ABSTRACT_FROM  => 'lib/Wurfl.pm', # retrieve abstract from module
-       AUTHOR         => 'Andrea Guzzo <aguzzo@prod.lhr1.booking.com>') : ()),
+      (ABSTRACT_FROM  => 'lib/Mobile/Libwurfl.pm', # retrieve abstract from module
+       AUTHOR         => 'Andrea Guzzo <xant@xant.net>') : ()),
     LIBS              => [$LIBS],
     DEFINE            => '', # e.g., '-DHAVE_SOMETHING'
     INC               => $INC,
@@ -102,7 +102,7 @@ if  (eval {require ExtUtils::Constant; 1}) {
               {name=>"WURFL_MATCH_TYPE_RECOVERY", macro=>"1"},
               {name=>"WURFL_OK", macro=>"1"});
   ExtUtils::Constant::WriteConstants(
-                                     NAME         => 'Wurfl',
+                                     NAME         => 'Mobile::Libwurfl',
                                      NAMES        => \@names,
                                      DEFAULT_TYPE => 'IV',
                                      C_FILE       => 'const-c.inc',

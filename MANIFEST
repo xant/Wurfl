@@ -4,11 +4,11 @@ MANIFEST
 ppport.h
 README
 typemap
-Wurfl.xs
+Libwurfl.xs
 t/Wurfl.t
 fallback/const-c.inc
 fallback/const-xs.inc
-lib/Wurfl.pm
-lib/Wurfl/Device.pm
+lib/Mobile/Libwurfl.pm
+lib/Mobile/Libwurfl/Device.pm
 script/wurfld.pl
 script/wurfld_http.pl
